@@ -1,0 +1,53 @@
+{% extends 'blog/base_post.html' %}
+
+{% block content%}
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container container-edit" >
+        
+      <div class="post-list " id="html-postagens">
+        <h1 class="text-center h1-modificado">Postagens</h1>  
+        <hr>    
+      </div>
+      
+     <!--EXIBIÇÃO DO POST LIST-->
+
+     <div class="card-deck">
+      {% for post in posts %}
+        <div class="col-4 mb-5">
+            <div class="card">
+              {%if post.foto %}
+                <img src="{{ post.foto.url }}" style="width: 100%"  alt="responsive image">
+              {% endif %}
+              <div class="card-body">
+                <a href="{% url 'post' post.id %}"><h5>{{post.title}}</h5></a>
+                <p class="card-text">{{post.descricao_curta|linebreaks}}</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Autor: {{post.author}}</small>
+              </div>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+  
+
+{% endblock %}

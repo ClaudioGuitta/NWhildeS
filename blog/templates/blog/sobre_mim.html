@@ -1,0 +1,86 @@
+{% extends 'blog/base_sobre_mim.html' %}
+
+{%block content%}
+
+<div class="container-fluid p-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+      <div class="w-100">
+        <h1 class="mb-0">{{sobre_detail.primeiro_nome}}
+          <span class="text-primary">{{sobre_detail.segundo_nome}}</span>
+        </h1>
+        <div class=" mb-5">
+          <p>{{sobre_detail.email}}</p>
+        </div>
+        <p class="lead mb-5">{{sobre_detail.sobre|linebreaksbr}}</p>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/hilde_cg" target="blank">
+            <i class="fab fa-instagram "></i>
+          </a>
+          <a href="https://github.com/ClaudioGuitta" target="blank">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.youtube.com/channel/UCZSCdX0UkX8PMw-Bt49NS-Q?view_as=subscriber" target="blank">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://www.facebook.com/hildeclaudio.santos" target="blank">
+            <i class="fab fa-facebook-f" ></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
+      <div class="w-100">
+        <h2 class="mb-5">Experiência</h2>
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+            <div class="resume-content">
+                <p>{{sobre_detail.experiencia|linebreaksbr}}</p>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="education">
+      <div class="w-100">
+        <h2 class="mb-5">Educação</h2>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <p>{{sobre_detail.educacao|linebreaksbr}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="skills">
+      <div class="w-100">
+        <h2 class="mb-5">Habilidades</h2>
+
+        <div class="subheading mb-3">LINGUAGENS FERRAMENTAS DE PROGRAMAÇÃO E OUTROS</div>
+        <ul class="list-inline dev-icons">
+            {{sobre_detail.habilidades|safe}}
+        </ul>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="interests">
+      <div class="w-100">
+        <h2 class="mb-5">Interesses</h2>
+        <p>{{sobre_detail.interesse|linebreaksbr}}</p>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+   
+  </div>
+    
+{%endblock%}

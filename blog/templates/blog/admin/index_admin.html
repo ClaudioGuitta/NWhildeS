@@ -1,0 +1,13 @@
+{%extends 'blog/admin/base_admin.html'%}
+
+{% block content %}
+
+    <div class="container">
+    {% if user.is_authenticated %}
+        <p class="logged-in-p">
+            Olá {{ user.username }} seja bem vindo(a)!! 
+        </p>
+    {% endif %}
+    </div>
+
+{% endblock content %}

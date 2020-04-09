@@ -1,0 +1,56 @@
+{% extends 'blog/base_post.html' %}
+
+
+{% block content %}
+<style>
+  body{
+    background-color: #fff !important;
+  }
+</style>
+
+<div class="container-edit ">  
+  <div class="container" style="width: 60%;">
+    <div class="row">
+      <h1 class="col-11 text-center">{{mostrar.title}}</h1>
+      <a href="{%url 'post_list'%}"><i class="fas fa-arrow-left col-1"></i></a>
+      <div>
+        <h5 >Autor: {{mostrar.author}}</h5>
+        <p>{{mostrar.text|safe}}</p>
+        <br><br><br>
+        <p>publicado em: {{mostrar.published_date}}</p>
+      </div> 
+      <div>
+        <br><br><br><br><br>
+        <h4>Quer dar alguma idéia? Alguma pergunta? é só preencher o formulário!!</h4>
+
+
+        <form method="POST">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-12">
+              {{ form.nome }}
+            </div>
+            <div class="col-12">
+              {{form.telefone}}
+            </div>
+            <div class="col-12">
+              {{form.email}}
+            </div>
+            <div class="col-12">
+              {{form.mensagem }}
+            </div>
+            <div class="col-12 buton-form-contateme">
+              <button type="submit" class="btn btn-warning">Enviar</button>
+            </div>
+            </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+
+
+{% endblock %}

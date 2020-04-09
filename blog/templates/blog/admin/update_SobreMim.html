@@ -1,0 +1,26 @@
+{% extends 'blog/admin/base_admin.html' %}
+
+{% load bootstrap %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.primeiro_nome|bootstrap}}
+                {{form.segundo_nome|bootstrap}}
+                {{form.email|bootstrap}}
+                {{form.descricao_curta|bootstrap}}
+                {{form.sobre|bootstrap}}
+                {{form.experiencia|bootstrap}}
+                {{form.educacao|bootstrap}}
+                {{form.habilidades|bootstrap}}
+                {{form.interesse|bootstrap}}
+                {{form.imagem_sobre|bootstrap}}
+                <button type="submit" class="btn btn-primary">Salvar</button>
+             </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

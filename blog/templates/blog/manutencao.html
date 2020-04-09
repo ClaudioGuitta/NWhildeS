@@ -1,0 +1,34 @@
+{% extends "blog/base_post.html" %}
+
+{% block content %}
+
+<div class="container container-edit text-center" id="html-sobre">
+    <div class="post-list ">
+        <h1 class="text-center h1-modificado">Tabela de Serviços</h1>
+        <hr>
+    </div>
+    <div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      
+      <th scope="col">Serviço</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+  {%for mostrar in mostrar_servico%}
+    <tr>    
+      <td>{{mostrar.servico}}</td>
+      <td>{{mostrar.descricao}}</td>
+      <td>{{mostrar.valor}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+    </div>
+
+</div>
+
+{% endblock content %}

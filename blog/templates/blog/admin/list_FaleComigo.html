@@ -1,0 +1,91 @@
+{%extends 'blog/admin/base_admin.html'%}
+
+{% block content %}
+
+
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div class="row">
+      <div class="col-9">
+        <h6 class="m-0 font-weight-bold text-primary col-8">Fale Comigo</h6>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Telefone</th>
+              <th scope="col">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+           {% for mostrar in listar_FaleComigo %}
+              <tr>
+                <th scope="row">{{mostrar.nome|first}}</th>
+                <td>{{mostrar.nome}}</td>
+                <td>{{mostrar.email}}</td>
+                <td>{{mostrar.telefone}}</td>
+                <td>
+                  <a href="#" data-toggle="modal" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#ModalVer-{{mostrar.id}}"><i class="far fa-folder-open"></i></a>
+                  <a href="{% url 'FaleComigo_delete' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Excluir" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a> 
+                </td>
+  
+                      <!-- Modal mostrar -->
+  
+                      <div class="modal fade" id="ModalVer-{{mostrar.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Mensagem de {{mostrar.nome}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">                              
+                                <p>E-mail: {{mostrar.email}}</p><hr>
+                                <p>Telefone: {{mostrar.telefone}}</p><hr>
+                                
+                                <p>Menssagem: {{mostrar.mensagem|linebreaksbr}}</p>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>                     
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+  
+              </tr>
+  
+          {% endfor %}
+          </tbody>
+        </table>
+  </div>
+    
+  </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div class="row">
+      <div class="col-9">
+        <h6 class="m-0 font-weight-bold text-primary col-8">Contatos Recentes</h6>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    
+  </div>
+</div>

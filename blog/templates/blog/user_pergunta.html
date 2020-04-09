@@ -1,0 +1,35 @@
+{% extends 'registration/base_login.html' %}
+{% load bootstrap %}
+
+
+{% block content %}
+<style>
+    .container{
+        background-color: gainsboro;
+    }
+</style>
+
+    <div class="container w-75 p-3 shadow-sm p-4" >
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12">
+                    {{ form.nome|bootstrap }}
+                </div>
+                <div class="col-12">
+                    {{form.telefone|bootstrap}}
+                </div>
+                <div class="col-12">
+                    {{form.email|bootstrap}}
+                </div>
+                <div class="col-12">
+                    {{form.mensagem|bootstrap }}
+                </div>
+                <div class="col-12 buton-form-contateme">
+                    <button type="submit" class="btn btn-warning">Enviar</button>
+                </div>
+             </div>
+        </form>                  
+    </div>
+
+{% endblock content %}

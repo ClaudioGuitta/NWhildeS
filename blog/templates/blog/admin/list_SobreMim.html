@@ -1,0 +1,72 @@
+{%extends 'blog/admin/base_admin.html'%}
+
+{% block content %}
+
+
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div class="row">
+      <div class="col-9">
+        <h6 class="m-0 font-weight-bold text-primary col-8">Sobre Mim</h6>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Foto</th>
+          <th scope="col">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+    {% for mostrar in listar_SobreMim %}
+        <tr>
+          <td>{{mostrar.primeiro_nome|first}}</td>
+          <td>{{mostrar.primeiro_nome}} {{mostrar.segundo_nome}}</td>
+          <td>
+            <a href="" data-toggle="modal" data-target="#ModalVer">Foto</a>
+          </td>
+    
+    
+                      <!-- Modal -->
+                      <div class="modal fade" id="ModalVer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Imagem</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                              {% if mostrar.imagem_sobre %}
+                                <img src="{{mostrar.imagem_sobre.url}}" style="width: 25rem;" alt="">
+                              {% endif %}
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                           
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+    
+    
+          <td>
+            <a href="{% url 'editar_SobreMim' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning btn-circle"><i class="fas fa-edit"></i></a>
+          </td>
+        </tr>
+    {% endfor %}
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+{% endblock content %}

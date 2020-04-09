@@ -1,0 +1,78 @@
+{%extends 'blog/admin/base_admin.html'%}
+
+{% block content %}
+
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div class="row">
+      <div class="col-9">
+        <h6 class="m-0 font-weight-bold text-primary col-8">Meu Blog</h6>
+      </div>
+      <a href="{% url 'criar_MeuBlog' %}" class="btn btn-secondary btn-icon-split">
+        <span class="icon text-white-50">
+          <i class="fas fa-arrow-right"></i>
+        </span>
+        <span class="text">Adicionar Foto</span>
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table">
+
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Descrição Curta</th>
+            <th scope="col">Imagem</th>
+            <th scope="col">Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for mostrar in listar_MeuBlog %}
+            <tr>
+              <th scope="row">{{mostrar.descricao_curta|first}}</th>
+              <td>{{mostrar.descricao_curta}}</td>
+              <td>
+              
+                <a href="#" data-toggle="modal" data-target="#modalver-{{mostrar.id}}">Imagem</a> 
+              
+              </td>
+      
+      
+                <!-- Modal -->
+              <div class="modal fade" id="modalver-{{mostrar.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Imagem</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                      {% if mostrar.fotos %}
+                        <img src="{{mostrar.fotos.url}}" style="width: 25rem;" alt="">
+                      {% endif %}
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                   
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+      
+              <td>
+                <a href="{% url 'editar_MeuBlog' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Mostrar" class="btn btn-warning btn-circle" ><i class="fas fa-edit"></i></a>
+                <a href="{% url 'MeuBlog_delete' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Excluir" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>      
+      
+        {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+{% endblock content %}

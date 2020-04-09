@@ -1,0 +1,48 @@
+{%extends 'blog/admin/base_admin.html'%}
+
+{% block content %}
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+      <div class="row">
+        <div class="col-9">
+          <h6 class="m-0 font-weight-bold text-primary col-8">Serviço Mautenção</h6>
+        </div>
+        <a href="{% url 'criar_ServicoManutencao' %}" class="btn btn-secondary btn-icon-split">
+          <span class="icon text-white-50">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+          <span class="text">Adicionar Serviço</span>
+        </a>
+      </div>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Serviço</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for mostrar in listar_ServicoManutencao %}
+        <tr>
+          <td>{{mostrar.servico}}</td>
+          <td>{{mostrar.descricao}}</td>
+          <td>{{mostrar.valor}}</td>
+          <td>
+            <a href="{% url 'editar_ServicoManutencao' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Mostrar" class="btn btn-warning btn-circle"><i class="fas fa-edit"></i></a>
+            <a href="{% url 'ServicoManutencao_delete' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Excluir" class="btn btn-danger btn-circle" ><i class="fas fa-trash"></i></a>
+          </td>
+        </tr>
+    
+      {% endfor %}
+      </tbody>
+    </table>
+    
+  </div>
+</div>
+
+{% endblock content %}

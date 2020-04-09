@@ -1,0 +1,20 @@
+{% extends 'blog/admin/base_admin.html' %}
+
+{% load bootstrap %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.author|bootstrap}}
+            {{form.title|bootstrap}}
+            {{form.descricao_curta|bootstrap}}
+            {{form.text|bootstrap|safe}}
+            {{form.media}}
+            {{form.created_date|bootstrap}}
+            {{form.published_date|bootstrap}}
+            {{form.foto|bootstrap}}
+            <button type="submit" class="btn btn-primary">Criar</button>
+        </form>
+    </div>
+{% endblock content %}
