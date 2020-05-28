@@ -1,7 +1,7 @@
-{%extends 'blog/admin/base_admin.html'%}
+{%extends 'blog/admin/dist_templates/index.html'%}
 
 {% block content %}
-
+{% if user.is_superuser %}
 
 <div class="card shadow mb-4">
   <div class="card-header py-3">
@@ -22,24 +22,24 @@
 
         <thead class="thead-dark">
           <tr>
-            <th scope="col">#</th>
+            <th class="ocutar-tabela" scope="col">#</th>
             <th scope="col">Descrição Curta</th>
-            <th scope="col">Imagem</th>
+            <th class="ocutar-tabela" scope="col">Imagem</th>
             <th scope="col">Ação</th>
           </tr>
         </thead>
         <tbody>
         {% for mostrar in listar_MeuBlog %}
             <tr>
-              <th scope="row">{{mostrar.descricao_curta|first}}</th>
+              <th class="ocutar-tabela" scope="row">{{mostrar.descricao_curta|first}}</th>
               <td>{{mostrar.descricao_curta}}</td>
-              <td>
-              
-                <a href="#" data-toggle="modal" data-target="#modalver-{{mostrar.id}}">Imagem</a> 
-              
+              <td class="ocutar-tabela">
+
+                <a href="#" data-toggle="modal" data-target="#modalver-{{mostrar.id}}">Imagem</a>
+
               </td>
-      
-      
+
+
                 <!-- Modal -->
               <div class="modal fade" id="modalver-{{mostrar.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -57,22 +57,35 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                   
+
                       </div>
                     </div>
                   </div>
                 </div>
-  
-      
+
+
               <td>
                 <a href="{% url 'editar_MeuBlog' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Mostrar" class="btn btn-warning btn-circle" ><i class="fas fa-edit"></i></a>
                 <a href="{% url 'MeuBlog_delete' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Excluir" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
               </td>
-            </tr>      
-      
+            </tr>
+
         {% endfor %}
         </tbody>
       </table>
   </div>
 </div>
+{% else %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                    <div class="text-center mt-4">
+                    <h1 class="display-1">401</h1>
+                    <p class="lead">Não Autorizado!</p>
+                    <p>O acesso a este recurso foi negado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
 {% endblock content %}

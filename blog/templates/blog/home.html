@@ -3,24 +3,12 @@
 
 
 {% block content %}
-  <!-- Sobre Section -->
-  <section class="page-section bg-primary" id="about">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <h2 class="text-white mt-0">{{sobre_mim.nome}}</h2>
-          <hr class="divider light my-4">
-          <p class="text-white-50 mb-4">{{sobre_mim.descricao_curta}}</p>
-          <a class="btn btn-light btn-xl js-scroll-trigger" href="{%url 'sobre_mim'%}">Saber Mais</a>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
 
   <!-- Button trigger modal -->
 
-  
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -50,30 +38,30 @@
       <div class="row">
         <div class="col-lg-3 col-md-6 text-center">
           <div class="mt-5">
-            <a href="#services"><i class="fab fa-4x fa-html5 text-primary mb-4"  data-toggle="modal" data-target="#exampleModal"></i></a>
-            <h3 class="h4 mb-2">Aprendendo Html/CSS</h3>
-            <p class="text-muted mb-0">Incluindo frameworks como Bootstrap e Materialize</p>
+            <a href="#services"><i class="fas fa-th-large fa-4x text-primary mb-4"  data-toggle="modal" data-target="#exampleModal"></i></a>
+            <h3 class="h4 mb-2">Apps</h3>
+            <p class="text-muted mb-0">Conheça nossas Aplicações</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center">
           <div class="mt-5">
-            <a href="{%url 'post_list'%}"><i class="fas fa-4x fa-laptop-code text-primary mb-4"></i></a>
-            <h3 class="h4 mb-2">Aprendendo Python</h3>
-            <p class="text-muted mb-0">Com framework Django e Kivi</p>
+            <a href="{%url 'post_list'%}"><i class="fas fa-4x fa-blog text-primary mb-4"></i></a>
+            <h3 class="h4 mb-2">Blog</h3>
+            <p class="text-muted mb-0">Amplie seus Conhecimentos</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center">
           <div class="mt-5">
             <a href="##services"><i class="fas fa-4x fa-video text-primary mb-4" data-toggle="modal" data-target="#exampleModal"></i></a>
-            <h3 class="h4 mb-2">Blog só com videos</h3>
-            <p class="text-muted mb-0"></p>
+            <h3 class="h4 mb-2">Videos</h3>
+            <p class="text-muted mb-0">Canais e Links</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center">
           <div class="mt-5">
-            <a href="{%url 'manutencao'%}"><i class="fas fa-4x fa-laptop-medical text-primary mb-4"></i></a>
-            <h3 class="h4 mb-2">Manutenção de Computadores</h3>
-            <p class="text-muted mb-0">Conheça os serviços</p>
+            <a href="{%url 'manutencao'%}"><i class="fas fa-4x fa-shopping-cart text-primary mb-4"></i></a>
+            <h3 class="h4 mb-2">Serviços</h3>
+            <p class="text-muted mb-0">Contrate nossos Serviços</p>
           </div>
         </div>
       </div>
@@ -82,7 +70,6 @@
 
   <!-- Meu blog Section -->
   <section id="portfolio">
-    
     <div class="container-fluid p-0">
       <div class="row no-gutters">
       {% for imagem in s_imagens %}
@@ -99,7 +86,21 @@
       {% endfor %}
       </div>
     </div>
-    
+  </section>
+
+
+      <!-- Sobre Section -->
+  <section class="page-section bg-primary" id="about">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="text-white mt-0">{{sobre_mim.nome}}</h2>
+          <hr class="divider light my-4">
+          <p class="text-white-50 mb-4">{{sobre_mim.descricao_curta}}</p>
+          <a class="btn btn-light btn-xl js-scroll-trigger" href="{%url 'sobre_mim'%}">Saber Mais</a>
+        </div>
+      </div>
+    </div>
   </section>
 
 
@@ -119,27 +120,27 @@
           <div></div>
         </div>
         <div class="col-lg-2 mr-auto text-center">
-          <a href="https://www.facebook.com/hildeclaudio.santos" target="blank"><i class="fab fa-facebook-square fa-3x mb-3 text-muted"></i></a>
+          <a href="https://www.facebook.com/BlogHildeS/?modal=admin_todo_tour"><i class="fab fa-facebook-square fa-3x mb-3 text-muted"></i></a>
           <!-- Make sure to change the email address in anchor text AND the link below! -->
-          
+
         </div>
         <div class="col-lg-2 mr-auto text-center">
           <a href="https://www.instagram.com/hilde_cg" target="blank"><i class="fab fa-instagram fa-3x mb-3 text-muted"></i></a>
           <!-- Make sure to change the email address in anchor text AND the link below! -->
-          
+
         </div>
         <div class="col-lg-2 mr-auto text-center">
-          <a href="https://www.youtube.com/channel/UCZSCdX0UkX8PMw-Bt49NS-Q?view_as=subscriber" target="blank"><i class="fab fa-youtube fa-3x mb-3 text-muted"></i></a>
+          <a href="https://www.youtube.com/channel/UC9HLLrTA7muu8xs9B-f53Hw?view_as=subscriber" target="blank"><i class="fab fa-youtube fa-3x mb-3 text-muted"></i></a>
           <!-- Make sure to change the email address in anchor text AND the link below! -->
-          
+
         </div>
 
-        
+
         <div class="col-lg-2 mr-auto text-center">
           <a href="#formmodal"><i class="fas fa-envelope fa-3x mb-3 text-muted" data-toggle="modal" data-target="#formModal"></i></a>
           <!--
           <a href="#contact"><i class="fas fa-envelope fa-3x mb-3 text-muted" data-toggle="modal" data-target="#formModal"></i></a>-->
-          
+
         <!--AJEITAR ESSE MODALL-->
           <!-- Modal -->
           <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -177,14 +178,14 @@
                             </form>
                       </div>
                   </div>
-                
+
                   <!--FINAL DO FORMULARIO PARA ENTRAR EM CONTATO-->
-                  
+
                 </div>
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>

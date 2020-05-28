@@ -1,6 +1,7 @@
-{%extends 'blog/admin/base_admin.html'%}
+{%extends 'blog/admin/dist_templates/index.html'%}
 
 {% block content %}
+{% if user.is_superuser %}
 
 
 
@@ -17,7 +18,7 @@
       <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">#</th>
+          <th class="ocutar-tabela" scope="col">#</th>
           <th scope="col">Logo</th>
           <th scope="col">Imagem de fundo</th>
           <th scope="col">Ação</th>
@@ -26,17 +27,17 @@
       <tbody>
       {% for listar in listar_editar_nav_blog %}
         <tr>
-          <th scope="row">{{listar.logo|first}}</th>
+          <th class="ocutar-tabela" scope="row">{{listar.logo|first}}</th>
           <td>{{listar.logo}}</td>
-          
+
           <td>
           {% if listar.imagem_de_fundo %}
           <a href="{{listar.imagem_de_fundo.url}}" data-toggle="modal" data-target="#ModalVer">Imagem</a>
           {% endif %}
           </td>
-    
+
           <!-- Modal -->
-    
+
               <div class="modal fade" id="ModalVer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -57,8 +58,8 @@
                     </div>
                   </div>
                 </div>
-            <td><a href="{% url 'editar_nav' listar.id %}" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning btn-circle"><i class="fas fa-edit"></i></a></td>  
-    
+            <td><a href="{% url 'editar_nav' listar.id %}" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning btn-circle"><i class="fas fa-edit"></i></a></td>
+
         </tr>
       {% endfor %}
       </tbody>
@@ -66,5 +67,18 @@
     </div>
   </div>
 </div>
+{% else %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                    <div class="text-center mt-4">
+                    <h1 class="display-1">401</h1>
+                    <p class="lead">Não Autorizado!</p>
+                    <p>O acesso a este recurso foi negado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
 
 {% endblock %}

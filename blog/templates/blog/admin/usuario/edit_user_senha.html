@@ -1,0 +1,30 @@
+{% extends 'blog/admin/dist_templates/index.html' %}
+
+{% block content %}
+{% load bootstrap %}
+    <div id="layoutError_content">
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="card border-dark mb-3">
+                            <div class="card-header">Editar Senha</div>
+                            <div class="card-body text-dark">
+                                <form action="." method="post">
+                                    {% csrf_token %}
+                                    {{ user_form.password|bootstrap }}
+
+                                    <button class="btn btn-primary" type="submit">Salvar</button>
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+{% endblock content %}

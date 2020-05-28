@@ -6,19 +6,63 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 from .forms import *
 
 
 ####################  Views   #########################
 
+
+
 def post_list(request):                    ## modelo em função
-    posts = Post.objects.all().order_by('-created_date')
     editar_nav = Editar_nav_blog.objects.get(pk=1)
     sobre_mim = SobreMim.objects.get(pk=1)
 
+    search = request.GET.get('search')
+    filter = request.GET.get('filter')
 
-    return render(request, 'blog/post_list.html', {'posts': posts, 'editar_nav': editar_nav, 'sobre_mim': sobre_mim})
+    ultimas_postagens = Post.objects.all().order_by('-created_date')
+
+    if search:
+        posts_list = Post.objects.filter(title__icontains=search)
+        paginator = Paginator(posts_list, 8)
+        page = request.GET.get('page')
+        posts = paginator.get_page(page)
+
+        ultimas = Post.objects.all().order_by('-created_date')
+        paginator2 = Paginator(ultimas,3)
+        page2 = request.GET.get('page')
+        ultimas_postagens = paginator2.get_page(page2)
+
+
+    elif filter:
+        posts_list = Post.objects.filter(tipo=filter).order_by('-created_date')
+        paginator = Paginator(posts_list, 8)
+        page = request.GET.get('page')
+        posts = paginator.get_page(page)
+
+        ultimas = Post.objects.all().order_by('-created_date')
+        paginator2 = Paginator(ultimas,3)
+        page2 = request.GET.get('page')
+        ultimas_postagens = paginator2.get_page(page2)
+
+    else:
+
+        posts_list = Post.objects.all().order_by('-created_date')
+        paginator = Paginator(posts_list, 8)
+        page = request.GET.get('page')
+        posts = paginator.get_page(page)
+
+        ultimas = Post.objects.all().order_by('-created_date')
+        paginator2 = Paginator(ultimas,3)
+        page2 = request.GET.get('page')
+        ultimas_postagens = paginator2.get_page(page2)
+
+
+    return render(request, 'blog/post_list.html', {'posts': posts, 'editar_nav': editar_nav, 'sobre_mim': sobre_mim, 'ultimas_postagens':ultimas_postagens})
+
+
 
 def sobre_mim_detail(request):
     sobre_detail = SobreMim.objects.get(pk=1)
@@ -26,21 +70,43 @@ def sobre_mim_detail(request):
     return render(request, 'blog/sobre_mim.html', {'sobre_detail':sobre_detail,'editar_nav': editar_nav})
 
 
+
+
+
 def post_mostrar(request, id):
-    mostrar = Post.objects.get(pk=id)
+
     editar_nav = Editar_nav_blog.objects.get(pk=1)
     sobre_mim = SobreMim.objects.get(pk=1)
 
-    form = FaleComigoForm(request.POST)
+    search = request.GET.get('search')
+    if search:
+        posts = Post.objects.filter(title__icontains=search)
 
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return redirect('post_list')
-        else:
-            form = FaleComigoForm()
+        ultimas = Post.objects.all().order_by('-created_date')
+        paginator2 = Paginator(ultimas,3)
+        page2 = request.GET.get('page')
+        ultimas_postagens = paginator2.get_page(page2)
 
-    return render(request, 'blog/post.html', {'mostrar': mostrar, 'editar_nav': editar_nav,'sobre_mim': sobre_mim,'form': form})
+        return render(request, 'blog/post_list.html', {'editar_nav': editar_nav,'sobre_mim': sobre_mim,'posts': posts})
+    else:
+
+        ultimas = Post.objects.all().order_by('-created_date')
+        paginator2 = Paginator(ultimas,3)
+        page2 = request.GET.get('page')
+        ultimas_postagens = paginator2.get_page(page2)
+
+        mostrar = Post.objects.get(pk=id)
+
+        form = FaleComigoForm(request.POST)
+
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                return redirect('post_list')
+            else:
+                form = FaleComigoForm()
+
+        return render(request, 'blog/post.html', {'mostrar': mostrar, 'editar_nav': editar_nav,'sobre_mim': sobre_mim,'form': form,'ultimas_postagens':ultimas_postagens})
 
 
 class testeListView(ListView):
@@ -89,12 +155,12 @@ def manutencao_de_computador(request):
 ###########################   Administração do Site  ######################
 @login_required()
 def index_admin(request):
-    
+
     return render(request, 'blog/admin/index_admin.html')
 
 
 ##########  VIEWS LISTAR   #############
-    
+
 @login_required()
 def list_Editar_nav_blog(request):
     listar_editar_nav_blog = Editar_nav_blog.objects.all()
@@ -103,7 +169,7 @@ def list_Editar_nav_blog(request):
 
 @login_required()
 def list_FaleComigo(request):
-    listar_FaleComigo = FaleComigo.objects.all().order_by('-data')
+    listar_FaleComigo = FaleComigo.objects.all()
     return render(request, 'blog/admin/list_FaleComigo.html',{'listar_FaleComigo':listar_FaleComigo})
 
 @login_required()
@@ -113,7 +179,7 @@ def list_MeuBlog(request):
 
 @login_required()
 def list_Post(request):
-    listar_post = Post.objects.all().order_by('-created_date')
+    listar_post = Post.objects.all().order_by('-created_date').filter(autor=request.user)
     return render(request, 'blog/admin/list_Post.html',{'listar_post':listar_post})
 
 
@@ -132,7 +198,6 @@ def list_ServicoManutencao(request):
 
 
 # VIEWS UPDATE
-
 
 @login_required()
 def update_Editar_nav_blog(request,id):
@@ -168,7 +233,9 @@ def UpdatePost(request,id):
     form = UpdatePostForm(request.POST or None, request.FILES or None, instance=update_Post)
 
     if form.is_valid():
-        form.save()
+        post = form.save(commit=False)
+        post.autor = request.user
+        post.save()
         return redirect('list_Post')
     else:
         form = UpdatePostForm(request.POST or None, request.FILES or None, instance=update_Post)
@@ -199,7 +266,7 @@ def UpdateServicoManutencao(request,id):
         form = UpdateServicoManutencaoForm(request.POST or None, instance=update_ServicoManutencao)
     return render(request, 'blog/admin/update_ServicoManutencao.html', {'form':form})
 
-    
+
 
 
 #### CREATE ######
@@ -213,7 +280,7 @@ def CriarMeuBlog(request):
         return redirect('list_MeuBlog')
     else:
         form = UpdateMeuBlogForm(request.POST or None, request.FILES or None)
-    return render(request, 'blog/admin/criar_MeuBlog.html', {'form':form})
+    return render(request, 'blog/admin/criar_Meublog.html', {'form':form})
 
 
 @login_required()
@@ -221,7 +288,9 @@ def CriarPost(request):
     form = UpdatePostForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
-        form.save()
+        post = form.save(commit=False)
+        post.autor = request.user
+        post.save()
         return redirect('list_Post')
     else:
         form = UpdatePostForm(request.POST or None, request.FILES or None)
@@ -271,16 +340,67 @@ def ServicoManutencao_delete(request,id):
 
 
 ############### view para cadastro de pessoa blog  ##################
-'''
-def CadastrarPessoaBlog(request):
+
+def Registrar(request):
     user_form = CadastrarUserForm(request.POST or None)
-    
 
     if user_form.is_valid():
         user_form.save()
-        
-        
         return redirect('login')
 
     return render(request, 'registration/register.html',{'user_form':user_form})
-    '''
+
+
+
+def edit_perfil_list(request):
+
+    return render(request, 'blog/admin/usuario/edit_user.html',{})
+
+
+def editar_usuario_nome_completo(request):
+    user_form = CadastrarUserFormNomeCompleto(request.POST, instance=request.user)
+    if request.method == 'POST':
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('edit_perfil')
+
+    return render(request, 'blog/admin/usuario/edit_user_nomecompleto.html',{'user_form':user_form})
+
+
+def editar_usuario_username(request):
+    user_form = CadastrarUserFormUsername(request.POST, instance=request.user)
+    if request.method == 'POST':
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('edit_perfil')
+
+    return render(request, 'blog/admin/usuario/edit_user_username.html',{'user_form':user_form})
+
+
+def editar_usuario_email(request):
+    user_form = CadastrarUserFormEmail(request.POST, instance=request.user)
+    if request.method == 'POST':
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('edit_perfil')
+
+    return render(request, 'blog/admin/usuario/edit_user_email.html',{'user_form':user_form})
+
+
+def editar_usuario_senha(request):
+    user_form = CadastrarUserFormPassword(request.POST, instance=request.user)
+    if request.method == 'POST':
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('edit_perfil')
+
+    return render(request, 'blog/admin/usuario/edit_user_senha.html',{'user_form':user_form})
+
+
+
+
+
+
+
+
+

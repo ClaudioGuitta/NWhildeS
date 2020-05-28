@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        {% load static %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="img/favicon.png" type="image/png">
+        <title>Blog</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'fontawesome-free-5.8.2-web/css/all.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/postagens/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/postagens/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/postagens/css/magnific-popup.css' %}">
+
+        <!-- main css -->
+        <link rel="stylesheet" href="{% static 'bootstrap/postagens/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'cssarq/style.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/postagens/css/creative.css' %}">
+    </head>
+    <body class="blog_page">
+
+        <!--================Header Menu Area =================-->
+        <header class="header_area" >
+            <div class="main_menu">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <a class="navbar-brand js-scroll-trigger" href="{% url 'index_home' %}#page-top"><img style="height: 40px; width:100px;" src="{% static 'imagens/LOGO NWHILDES.png' %}" alt="{{editar_nav.logo}}"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav menu_nav justify-content-center">
+                                <li class="nav-item"><a class="nav-link" href="{% url 'index_home' %}#services">Conteúdo</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'index_home' %}#portfolio">Meu Site</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'index_home' %}#about">Sobre</a>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'index_home' %}#contact">Fale Comigo</a>
+                                <li class="nav-item">
+                                {% if user.is_authenticated %}
+                                    <a class="nav-link js-scroll-trigger" href="{% url 'index_admin' %}">{{user.username}} <i class="fas fa-user"></i></a>
+                                {% else %}
+                                    <a class="nav-link js-scroll-trigger" href="{% url 'login' %}">Entrar <i class="fas fa-sign-in-alt"></i></a>
+                                {% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!--================Header Menu Area =================-->
+{% block content %}
+
+{% endblock content %}
+
+  <!-- Footer -->
+  <footer class="bg-light py-5">
+    <div class="container">
+      <div class="small text-center text-muted">Copyright &copy; NWhildes</div>
+    </div>
+  </footer>
+
+
+
+
+        <!-- Optional JavaScript -->
+        <script src="{% static 'bootstrap/vendor/jquery/jquery.min.js'%}"></script>
+        <script src="{% static 'jsarq/componente.js' %}"></script>
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="{% static 'bootstrap/postagens/js/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'bootstrap/postagens/js/popper.js' %}"></script>
+        <script src="{% static 'bootstrap/postagens/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'bootstrap/postagens/js/estelar.js' %}"></script>
+        <script src="{% static 'bootstrap/postagens/js/jquery.magnific-popup.min.js' %}"></script>
+        <script src="{% static 'bootstrap/postagens/js/jquery.ajaxchimp.min.js' %}"></script>
+        <script src="{% static 'bootstrap/postagens/js/mail-script.js' %}"></script>
+        <script src="{% static 'bootstrap/postagens/js/theme.js' %}"></script>
+
+
+
+    </body>
+</html>

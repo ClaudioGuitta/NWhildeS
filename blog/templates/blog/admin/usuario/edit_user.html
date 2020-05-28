@@ -1,0 +1,35 @@
+{% extends 'blog/admin/dist_templates/index.html' %}
+
+{% block content %}
+{% load bootstrap %}
+            <div id="layoutError_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+
+                                <div class="card" style="width: 30rem;">
+                                    <div class="card-header text-center">
+                                        Configurações de Usuário
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Nome Completo: <a href="{% url 'editar_usuario_nome_completo' %}" >{{ user.first_name }} {{ user.last_name }} <i class="fas fa-edit"></i></a></li>
+                                        <li class="list-group-item">Nome de Usuário: <a href="{% url 'editar_usuario_username' %}">{{ user.username }} <i class="fas fa-edit"></i></a></li>
+                                        <li class="list-group-item">E-mail: <a href="{% url 'editar_usuario_email' %}" >{{ user.email }} <i class="fas fa-edit"></i></a></li>
+                                        <li class="list-group-item">Senha: <a href="{% url 'editar_usuario_senha' %}">******** <i class="fas fa-edit"></i></a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+
+
+{% endblock content %}
+
+
+
+
+

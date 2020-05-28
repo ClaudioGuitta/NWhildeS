@@ -3,8 +3,14 @@
     margin-top: 10%;
 }
 
+@media (max-width: 900px){
+    .container-edit{
+        margin-top: 25% !important;
+    }
+}
+
 .img-header{
-    width: 100%; 
+    width: 100%;
     opacity: 0.8;
   }
 
@@ -14,3 +20,17 @@
     height: 198px;
     padding: 0;
 }
+
+.img-fluid-custon {
+    width:30% !important;
+}
+
+
+@media (max-width: 991px){
+    .ocutar-tabela{
+        display:none; !important;
+    }
+
+}
+
+

@@ -1,0 +1,3 @@
+No models, onde tem paciente vc vai substituir pelo usuario do seu projeto e nos import dos models, ao inves de "DiseasesApp.models" vc vai colocar o import do seu projeto...
+
+Falta criar o botão pra marcar como concluido.

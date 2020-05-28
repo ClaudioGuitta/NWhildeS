@@ -25,7 +25,7 @@ SECRET_KEY = 'xu2pa98^uv*jb6fg-9yb@$27o$mmrw5t9uey5@1@53-69$-opp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['barrabas.pythonanywhere.com']
 
 
 # Application definition
@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'blog',
     'bootstrapform',
     'ckeditor',
-    
-    
+    'tarefas',
+
+
+
 
 
 ]
@@ -113,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-BR'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -137,9 +139,10 @@ LOGIN_URL = 'login'
 
 LOGOUT_URL = 'login'
 
-LOGOUT_REDIRECT_URL = 'index_home'
+LOGOUT_REDIRECT_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'index_admin'
+
 
 
 

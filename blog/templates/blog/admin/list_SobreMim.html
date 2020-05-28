@@ -1,7 +1,7 @@
-{%extends 'blog/admin/base_admin.html'%}
+{%extends 'blog/admin/dist_templates/index.html'%}
 
 {% block content %}
-
+{% if user.is_superuser %}
 
 
 <div class="card shadow mb-4">
@@ -16,23 +16,23 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">#</th>
+          <th class="ocutar-tabela" scope="col">#</th>
           <th scope="col">Nome</th>
-          <th scope="col">Foto</th>
+          <th class="ocutar-tabela" scope="col">Foto</th>
           <th scope="col">Ação</th>
         </tr>
       </thead>
       <tbody>
-        
+
     {% for mostrar in listar_SobreMim %}
         <tr>
-          <td>{{mostrar.primeiro_nome|first}}</td>
+          <td class="ocutar-tabela">{{mostrar.primeiro_nome|first}}</td>
           <td>{{mostrar.primeiro_nome}} {{mostrar.segundo_nome}}</td>
-          <td>
+          <td class="ocutar-tabela">
             <a href="" data-toggle="modal" data-target="#ModalVer">Foto</a>
           </td>
-    
-    
+
+
                       <!-- Modal -->
                       <div class="modal fade" id="ModalVer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
@@ -50,23 +50,35 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-                           
+
                               </div>
                             </div>
                           </div>
                         </div>
-    
-    
+
+
           <td>
             <a href="{% url 'editar_SobreMim' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning btn-circle"><i class="fas fa-edit"></i></a>
           </td>
         </tr>
     {% endfor %}
-        
+
       </tbody>
     </table>
   </div>
 </div>
 
-
+{% else %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                    <div class="text-center mt-4">
+                    <h1 class="display-1">401</h1>
+                    <p class="lead">Não Autorizado!</p>
+                    <p>O acesso a este recurso foi negado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
 {% endblock content %}

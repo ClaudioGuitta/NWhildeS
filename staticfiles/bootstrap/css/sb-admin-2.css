@@ -10996,3 +10996,13 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+
+
+
+@media (max-width: 500px) {
+    .ocutar-tabela {
+        display: none;
+    }
+}
+

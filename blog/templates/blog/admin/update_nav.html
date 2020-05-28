@@ -1,7 +1,8 @@
-{% extends 'blog/admin/base_admin.html' %}
+{%extends 'blog/admin/dist_templates/index.html'%}
 {% load bootstrap %}
 
 {% block content %}
+{% if user.is_superuser %}
 <div class="container">
     <div class="content">
         <form method="POST" enctype="multipart/form-data">
@@ -12,4 +13,17 @@
         </form>
     </div>
 </div>
-{% endblock content %}  
+{% else %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                    <div class="text-center mt-4">
+                    <h1 class="display-1">401</h1>
+                    <p class="lead">Não Autorizado!</p>
+                    <p>O acesso a este recurso foi negado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

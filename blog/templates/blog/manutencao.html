@@ -1,17 +1,25 @@
-{% extends "blog/base_post.html" %}
+{% extends "blog/base_post2.html" %}
 
 {% block content %}
+
+
+<style>
+      #search-form{
+      display:none ;
+  }
+</style>
 
 <div class="container container-edit text-center" id="html-sobre">
     <div class="post-list ">
         <h1 class="text-center h1-modificado">Tabela de Serviços</h1>
         <hr>
+        <h4>Serviço disponível apenas para João Pessoa</h4>
     </div>
     <div>
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      
+
       <th scope="col">Serviço</th>
       <th scope="col">Descrição</th>
       <th scope="col">Valor</th>
@@ -19,7 +27,7 @@
   </thead>
   <tbody>
   {%for mostrar in mostrar_servico%}
-    <tr>    
+    <tr>
       <td>{{mostrar.servico}}</td>
       <td>{{mostrar.descricao}}</td>
       <td>{{mostrar.valor}}</td>

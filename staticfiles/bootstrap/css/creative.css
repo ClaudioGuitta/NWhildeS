@@ -159,7 +159,7 @@ sup {
 }
 
 a {
-  color: #f4623a;
+  color: #bd5d38;
   text-decoration: none;
   background-color: transparent;
 }
@@ -1662,6 +1662,11 @@ pre code {
   }
 }
 
+
+.navbar-scrolled{
+    background-color: #fff !important;
+}
+
 @media (max-width: 767.98px) {
   .table-responsive-md {
     display: block;
@@ -1681,6 +1686,16 @@ pre code {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
+
+  .container-edit {
+    margin-top: 30% !important;
+}
+
+.container-edit-post{
+    width:100% !important;
+    margin:10px !important;
+}
+
   .table-responsive-lg > .table-bordered {
     border: 0;
   }
@@ -4018,7 +4033,7 @@ input[type="button"].btn-block {
   padding: 0.25rem 0.75rem;
   font-size: 1.25rem;
   line-height: 1;
-  background-color: transparent;
+  background-color: transparent ;
   border: 1px solid transparent;
   border-radius: 0.25rem;
 }
@@ -4072,6 +4087,7 @@ input[type="button"].btn-block {
     display: none;
   }
 }
+
 
 @media (max-width: 767.98px) {
   .navbar-expand-md > .container,
@@ -9364,7 +9380,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #f4623a !important;
+  color: #bd5d38 !important
 }
 
 a.text-primary:hover, a.text-primary:focus {
@@ -9564,7 +9580,7 @@ html {
 hr.divider {
   max-width: 3.25rem;
   border-width: 0.2rem;
-  border-color: #f4623a;
+  border-color: #bd5d38;
 }
 
 hr.light {
@@ -9588,9 +9604,15 @@ hr.light {
   padding: 8rem 0;
 }
 
+@media (max-width: 750px) {
+    .img-header{
+        padding-top:0px;
+    }
+}
+
 #mainNav {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  background-color: #fff;
+  background-color: transparent;
   transition: background-color 0.2s ease;
 }
 
@@ -9600,8 +9622,10 @@ hr.light {
   color: #212529;
 }
 
+
+
 #mainNav .navbar-nav .nav-item .nav-link {
-  color: #6c757d;
+  color: #212529;
   font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   font-size: 0.9rem;
@@ -9609,17 +9633,18 @@ hr.light {
 }
 
 #mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active {
-  color: #f4623a;
+  color: #bd5d38;
 }
 
 #mainNav .navbar-nav .nav-item .nav-link.active {
-  color: #f4623a !important;
+  color: #bd5d38 !important;
 }
 
 @media (min-width: 992px) {
   #mainNav {
     box-shadow: none;
-    background-color: transparent;
+    background-color: black;
+    opacity:0.2;
   }
   #mainNav .navbar-brand {
     color: rgba(255, 255, 255, 0.7);
@@ -9640,6 +9665,7 @@ hr.light {
   #mainNav.navbar-scrolled {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     background-color: #fff;
+    opacity:2;
   }
   #mainNav.navbar-scrolled .navbar-brand {
     color: #212529;
@@ -9666,10 +9692,9 @@ header.masthead h1 {
 
 
 
-@media (min-width: 992px) {
+@media (min-width: 995px) {
   header.masthead {
-    height: 100vh;
-    min-height: 40rem;
+    height: 95vh;
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -9727,3 +9752,24 @@ header.masthead h1 {
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
 }
+
+
+
+
+.container-pagination{
+    display: flex;
+    justify-content: center;
+}
+
+.step-links{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.current{
+    margin-left:5px;
+    margin-right:5px;
+}
+

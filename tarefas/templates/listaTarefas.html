@@ -1,0 +1,217 @@
+{%extends 'blog/admin/dist_templates/index.html'%}
+
+
+{% block content %}
+
+    <div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div class="row">
+      <div class="col-9">
+        <h6 class="m-0 font-weight-bold text-primary col-8">Lista de Tarefas</h6>
+      </div>
+      <a href="{% url 'CrTa' %}" class="btn btn-secondary btn-icon-split">
+        <span class="icon text-white-50">
+          <i class="fas fa-arrow-right"></i>
+        </span>
+        <span class="text">Criar Tarefa</span>
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Tarefas a Fazer</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" data-toggle="collapse" href="#collapseAfazer">Ver</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">Tarefas Concluídas</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" data-toggle="collapse" href="#collapseConcluidas">Ver</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Tarefas vencidas</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" data-toggle="collapse" href="#collapseVencidas">Ver</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="collapse" id="collapseAfazer">
+            <div class="card card-body">
+                <h2>A fazer</h2>
+
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                        <th scope="col">Título</th>
+                        <th scope="col">Prazo</th>
+                        <th scope="col">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tarefa in tarefas_abertas %}
+                        <tr>
+                            <td>{{tarefa.titulo}}</td>
+                            <td>{{tarefa.data_vencimento}}</td>
+                            <td>
+                                <a href="#" data-toggle="modal" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#ModalVer-{{tarefa.id}}"><i class="far fa-folder-open"></i></a>
+                                <a href="#" class="btn btn-primary btn-circle"><i class="fas fa-check"></i></a>
+                                <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+
+                    <div class="modal fade" id="ModalVer-{{tarefa.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Tarefa</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Título: {{tarefa.titulo}}</h3>
+                                <p>Data: {{tarefa.data_vencimento}}</p>
+                                <p>Descrição: {{tarefa.descricao}}</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+        <div class="collapse" id="collapseConcluidas">
+            <div class="card card-body">
+                <h2>Concluídas</h2>
+
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                        <th scope="col">Título</th>
+                        <th scope="col">Prazo</th>
+                        <th scope="col">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tarefa in tarefas_concluidas %}
+                        <tr>
+
+                            <td>{{tarefa.titulo}}</td>
+                            <td>{{tarefa.data_vencimento}}</td>
+                            <td>
+                                <a href="#" data-toggle="modal" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#ModalVerConcluidas-{{tarefa.id}}"><i class="far fa-folder-open"></i></a>
+                                <a href="#" class="btn btn-primary btn-circle"><i class="fas fa-check"></i></a>
+                                <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+
+                    <div class="modal fade" id="ModalVerConcluidas-{{tarefa.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Tarefa</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Título: {{tarefa.titulo}}</h3>
+                                <p>Data: {{tarefa.data_vencimento}}</p>
+                                <p>Descrição: {{tarefa.descricao}}</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="collapse" id="collapseVencidas">
+            <div class="card card-body">
+                <h2>Vencidas</h2>
+
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                        <th scope="col">Título</th>
+                        <th scope="col">Prazo</th>
+                        <th scope="col">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tarefa in tarefas_vencidas %}
+                        <tr>
+                            <td>{{tarefa.titulo}}</td>
+                            <td>{{tarefa.data_vencimento}}</td>
+                            <td>
+                                <a href="#" data-toggle="modal" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#ModalVerVencidas-{{tarefa.id}}"><i class="far fa-folder-open"></i></a>
+                                <a href="#" class="btn btn-primary btn-circle"><i class="fas fa-check"></i></a>
+                                <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+
+                    <div class="modal fade" id="ModalVerVencidas-{{tarefa.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Tarefa</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Título: {{tarefa.titulo}}</h3>
+                                <p>Data: {{tarefa.data_vencimento}}</p>
+                                <p>Descrição: {{tarefa.descricao}}</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}

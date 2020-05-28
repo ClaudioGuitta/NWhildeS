@@ -1,8 +1,8 @@
-{%extends 'blog/admin/base_admin.html'%}
+{%extends 'blog/admin/dist_templates/index.html'%}
 
 {% block content %}
 
-
+{% if user.is_superuser %}
 
 <div class="card shadow mb-4">
   <div class="card-header py-3">
@@ -19,27 +19,27 @@
     </div>
   </div>
   <div class="card-body">
-    
-    <table class="table">
+
+    <table class="table ">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Autor</th>
+        <th class="ocutar-tabela" scope="col">Autor</th>
         <th scope="col">Titulo</th>
-        <th scope="col">Foto</th>
+        <th class="ocutar-tabela" scope="col">Foto</th>
         <th scope="col">Ação   </th>
-        
+
       </tr>
     </thead>
     <tbody>
     {% for mostrar in listar_post  %}
       <tr>
-        <th scope="row">{{mostrar.author}}</th>
+        <th class="ocutar-tabela" scope="row">{{mostrar.autor}}</th>
         <td>{{mostrar.title}}</td>
-        <td>
+        <td class="ocutar-tabela">
         {% if mostrar.foto %}
           <a href="{{mostrar.foto.url}}" data-toggle="modal" data-target="#ModalVer-{{mostrar.id}}">Foto</a>
         {% endif %}
-  
+
                     <!-- Modal -->
                     <div class="modal fade" id="ModalVer-{{mostrar.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -57,30 +57,42 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-                         
+
                             </div>
                           </div>
                         </div>
                       </div>
-            
-  
+
+
         </td>
         <td>
           <a href="{% url 'editar_Post' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning btn-circle"><i class="fas fa-edit"></i></a>
           <a href="{% url 'post_delete' mostrar.id %}" data-toggle="tooltip" data-placement="top" title="Excluir" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
         </td>
       </tr>
-  
-            
+
     {% endfor %}
     </tbody>
   </table>
-    
+
+
+
+
   </div>
 </div>
 
-{% for mostrar in listar_post %}
-
-{% endfor %}
+{% else %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                    <div class="text-center mt-4">
+                    <h1 class="display-1">401</h1>
+                    <p class="lead">Não Autorizado!</p>
+                    <p>O acesso a este recurso foi negado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
 
 {% endblock content %}
